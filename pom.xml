@@ -26,6 +26,11 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-core</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,7 +73,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.sky.Main</mainClass>
+                            <mainClass>com.sky.TestKt</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -78,6 +83,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
