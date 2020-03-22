@@ -79,8 +79,8 @@ class PWMControlServo {
         val pwmPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Pwm 1", PinState.LOW)
         pwmPin.setShutdownOptions(true, PinState.LOW)
 
-        blink(pwmPin)
-
+//        blink(pwmPin)
+        println("************")
         gpio.shutdown()
     }
 
