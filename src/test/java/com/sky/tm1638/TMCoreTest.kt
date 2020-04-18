@@ -5,7 +5,7 @@ import org.junit.Before
 import org.junit.Test
 
 
-class TmCoreTest{
+class TMCoreTest{
 
     @Before
     fun init(){

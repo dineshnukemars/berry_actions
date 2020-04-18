@@ -15,7 +15,8 @@ fi
 tar -xf "$appName".tar
 echo "extracted tar"
 
-cd "$appName"/bin/ || exit
+cd "$appName"/bin || exit
 
 echo "executing App - $appName"
-sudo ./"$appName"
+sudo chmod +x ./"$appName"
+./$appName
