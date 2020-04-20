@@ -1,20 +1,21 @@
 package sky.timing.diagram
 
+import com.sky.tm1638.EventRecorder
+import com.sky.tm1638.PinValue
 
-data class PinValue(val pinID: String, val timeStamp: Long, val state: Boolean)
+class TimingRecorder : EventRecorder {
 
-object EventRecorder {
     private val stateList = ArrayList<PinValue>()
 
-    fun addState(pinValue: PinValue) {
+    override fun addPinState(pinValue: PinValue) {
         stateList.add(pinValue)
     }
 
-    fun saveToFile() {
-        println("not implemented yet")
+    override fun saveToFile() {
+        println("Timing Recorder save to file not implemented yet")
     }
 
-    fun clear() {
+    override fun clear() {
         stateList.clear()
     }
 }

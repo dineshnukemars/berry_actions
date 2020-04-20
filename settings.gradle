@@ -1,2 +1,2 @@
-include 'TimingDiagram', 'App'
+include 'TimingDiagram', 'App', 'Tm1638_Core'
 

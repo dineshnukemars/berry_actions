@@ -1,7 +1,7 @@
 #!/bin/bash
 start=$(date +%s)
 
-echo "hello Sky - packaging application"
+echo "Hello Sky - packaging application"
 
 source ~/.bash_profile
 
@@ -30,4 +30,4 @@ echo "logging into Raspi"
 
 ssh $host 'bash -s' $appName <run_java.sh
 
-echo "******* finished ********"
+echo "!!!!Script End!!!!!"

@@ -1,5 +1,6 @@
 package sky.timing.diagram
 
+import com.sky.tm1638.PinValue
 import java.io.FileWriter
 
 class FileIO {
