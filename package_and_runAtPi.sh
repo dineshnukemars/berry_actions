@@ -8,7 +8,7 @@ source ~/.bash_profile
 skipBuild=$1
 
 if [ "$skipBuild" != "-skip" ]; then
-  ./gradlew assembleDist
+  ./gradlew distTar
   echo "app packaged, copying jar to pi...."
 else
   echo "skiped package, copying jar to pi...."
