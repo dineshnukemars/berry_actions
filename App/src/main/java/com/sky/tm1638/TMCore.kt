@@ -1,23 +1,17 @@
 package com.sky.tm1638
 
-import com.pi4j.io.gpio.*
+import com.pi4j.io.gpio.GpioPinDigitalMultipurpose
+import com.pi4j.io.gpio.GpioPinDigitalOutput
+import com.pi4j.io.gpio.PinMode
+import com.pi4j.io.gpio.PinPullResistance
 import java.lang.Thread.sleep
 
-class TMCore(val gpio: GpioController, strobePin: Pin, clockPin: Pin, val dataIOPin: Pin, val brightness: Int) {
-
-    private val strobe: GpioPinDigitalOutput = gpio.provisionDigitalOutputPin(strobePin, "strobe", PinState.HIGH)
-    private val clock: GpioPinDigitalOutput = gpio.provisionDigitalOutputPin(clockPin, "clock", PinState.HIGH)
-    private var dataIO: GpioPinDigitalOutput = gpio.provisionDigitalMultipurposePin(dataIOPin, PinMode.DIGITAL_OUTPUT)
+class TMCore(val strobe: GpioPinDigitalOutput, val clock: GpioPinDigitalOutput, val dataIO: GpioPinDigitalMultipurpose) {
 
     private val readMode = 0x02
     private val writeMode = 0x00
     private val incrementAddress = 0x00
     private val fixedAddress = 0x04
-
-    init {
-        turnOn(brightness)
-        clearDisplay()
-    }
 
     fun clearDisplay() {
         strobe.setState(false)
@@ -55,7 +49,6 @@ class TMCore(val gpio: GpioController, strobePin: Pin, clockPin: Pin, val dataIO
     }
 
     fun getData(): MutableList<Int> {
-
         strobe.setState(false)
         setDataMode(readMode, incrementAddress)
         sleep(20e-6.toLong())
@@ -68,7 +61,7 @@ class TMCore(val gpio: GpioController, strobePin: Pin, clockPin: Pin, val dataIO
             b.add(getByte())
 
         dataIO.mode = PinMode.DIGITAL_OUTPUT
-        dataIO.pullResistance =  PinPullResistance.OFF
+        dataIO.pullResistance = PinPullResistance.OFF
 
         strobe.setState(true)
         return b
@@ -104,3 +97,4 @@ class TMCore(val gpio: GpioController, strobePin: Pin, clockPin: Pin, val dataIO
         return temp
     }
 }
+
