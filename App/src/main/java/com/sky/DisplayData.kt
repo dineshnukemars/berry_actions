@@ -30,9 +30,9 @@ class DisplayData(private val segment: Segment) : Thread() {
             when (pressedBtnType) {
                 ButtonType.BUTTON_TIME -> segment.sendData(0, timeFormat.format(Date()))
                 ButtonType.BUTTON_DATE -> segment.sendData(0, dateFormat.format(Date()))
-                ButtonType.button2 -> TODO()
-                ButtonType.button3 -> TODO()
-                ButtonType.button4 -> TODO()
+                ButtonType.button2 -> segment.sendData(1, "2628894")
+                ButtonType.button3 -> segment.sendData(2, "709050")
+                ButtonType.button4 -> segment.sendData(2, "182992")
                 ButtonType.button5 -> TODO()
                 ButtonType.button6 -> TODO()
                 ButtonType.BUTTON_STOP -> stopLooping()

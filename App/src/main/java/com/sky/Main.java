@@ -7,7 +7,7 @@ public class Main {
 
         new PlayOnDisplay();
 
-        System.out.println("-------App finished-----");
+        System.out.println("-------Main finished-----");
     }
 
     public static void sleep(int i) {

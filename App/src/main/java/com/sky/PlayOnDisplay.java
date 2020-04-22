@@ -15,7 +15,7 @@ public class PlayOnDisplay {
         );
 
         TMCore tmCore = board.getTMCore();
-        tmCore.turnOn(1);
+        tmCore.turnOn(7);
         tmCore.clearDisplay();
 
         Segment segment = new Segment(tmCore, new TmMappings());
@@ -23,24 +23,30 @@ public class PlayOnDisplay {
         Switch switchOps = new Switch(tmCore);
         DisplayData displayData = new DisplayData(segment);
 
-        SwitchWatcher watcher = new SwitchWatcher(switchOps, (buttonType, watch) -> {
-            System.out.println("button " + buttonType + "pressed");
-
-            displayData.setPressedBtnType(buttonType);
-            ifBtnStopTerminate(board, tmCore, buttonType, watch);
-            return Unit.INSTANCE;
-        });
+        SwitchWatcher watcher = new SwitchWatcher(
+                switchOps,
+                (buttonType, switchWatcher) -> listenToButton(board, tmCore, displayData, buttonType, switchWatcher)
+        );
 
         displayData.start();
         watcher.start();
     }
 
-    private void ifBtnStopTerminate(TMBoard board, TMCore tmCore, ButtonType buttonType, SwitchWatcher watch) {
-        if (buttonType == ButtonType.BUTTON_STOP) {
-            watch.stopListening();
-            tmCore.clearDisplay();
-            board.clear();
-            System.out.println("stopped listening and clear screen and IO");
-        }
+    private Unit listenToButton(TMBoard board, TMCore tmCore, DisplayData displayData, ButtonType buttonType, SwitchWatcher watch) {
+        System.out.println("button " + buttonType + "pressed");
+        displayData.setPressedBtnType(buttonType);
+
+        if (buttonType == ButtonType.BUTTON_STOP)
+            ifBtnStopTerminate(board, tmCore, watch);
+
+        return Unit.INSTANCE;
+    }
+
+    private void ifBtnStopTerminate(TMBoard board, TMCore tmCore, SwitchWatcher watch) {
+
+        watch.stopListening();
+        tmCore.clearDisplay();
+        board.clear();
+        System.out.println("stopped listening and clear screen and IO");
     }
 }

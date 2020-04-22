@@ -11,11 +11,8 @@ class TimingRecorder : EventRecorder {
         stateList.add(pinValue)
     }
 
-    override fun saveToFile() {
-        println("Timing Recorder save to file not implemented yet")
-    }
-
-    override fun clear() {
+    override fun close() {
         stateList.clear()
+        println("Timing Recorder save to file not implemented yet")
     }
 }
