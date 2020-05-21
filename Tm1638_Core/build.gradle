@@ -3,6 +3,7 @@ apply plugin: "kotlin"
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api group: 'com.pi4j', name: 'pi4j-core', version: '1.2'
+    implementation project(':TimingDiagram')
 
     testImplementation 'junit:junit:4.11'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"

@@ -2,7 +2,9 @@ apply plugin: "kotlin"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation project(':Tm1638_Core')
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+    implementation group: 'org.apache.poi', name: 'poi', version: '4.1.2'
+
     testImplementation 'junit:junit:4.11'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }

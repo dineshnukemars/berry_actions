@@ -1,6 +1,7 @@
 package com.sky.tm1638
 
 import com.pi4j.io.gpio.*
+import sky.timing.diagram.EventRecorder
 
 class TMBoard(
         private val gpio: GpioController,
@@ -26,7 +27,7 @@ class TMBoard(
                 PinMode.DIGITAL_OUTPUT
         )
         return TMMultiPurposeIO(dataIOPin) { state ->
-            recorder?.addPinState(PinValue(dataIOPin.name, System.currentTimeMillis(), state))
+            recorder?.addPinState(dataIOPin.name, System.currentTimeMillis(), state)
         }
     }
 
@@ -37,7 +38,7 @@ class TMBoard(
                 PinState.HIGH
         )
         return TMPinDigitalOutput(clockPin) { state ->
-            recorder?.addPinState(PinValue(clockPin.name, System.currentTimeMillis(), state))
+            recorder?.addPinState(clockPin.name, System.currentTimeMillis(), state)
         }
     }
 
@@ -49,7 +50,7 @@ class TMBoard(
         )
 
         return TMPinDigitalOutput(strobePin) { state ->
-            recorder?.addPinState(PinValue(strobePin.name, System.currentTimeMillis(), state))
+            recorder?.addPinState(strobePin.name, System.currentTimeMillis(), state)
         }
     }
 
@@ -62,7 +63,8 @@ class TMBoard(
 data class PinConfig(val strobePin: Pin, val clockPin: Pin, val dataIOPin: Pin)
 
 class GpioConfig {
-    @JvmField val gpio: GpioController
+    @JvmField
+    val gpio: GpioController
 
     init {
         GpioFactory.setDefaultProvider(RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING))

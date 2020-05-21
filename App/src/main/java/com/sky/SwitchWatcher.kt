@@ -7,10 +7,6 @@ class SwitchWatcher(private val switchBtn: Switch, val buttonPressedListener: (B
     private var isStopListening: Boolean = false
 
     override fun run() {
-        listenToButtonActions()
-    }
-
-    fun listenToButtonActions() {
         while (!isStopListening) {
             getPressedBtn()?.let {
                 buttonPressedListener(it, this@SwitchWatcher)
